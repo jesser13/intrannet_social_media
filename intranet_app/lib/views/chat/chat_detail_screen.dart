@@ -8,6 +8,8 @@ import '../widgets/chat_bubble.dart';
 class ChatDetailScreen extends StatelessWidget {
   final TextEditingController _messageController = TextEditingController();
 
+  const ChatDetailScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final contactId = ModalRoute.of(context)!.settings.arguments as String;

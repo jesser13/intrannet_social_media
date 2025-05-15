@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
-import '../../providers/post_provider.dart';
+
 import '../../providers/group_provider.dart';
 import '../../services/group_service.dart';
 import '../../models/group.dart';
 import '../widgets/post_card.dart';
 
 class GroupDetailScreen extends StatelessWidget {
+  const GroupDetailScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final group = ModalRoute.of(context)!.settings.arguments as Group;
     final user = Provider.of<AuthProvider>(context).user!;
-    final postProvider = Provider.of<PostProvider>(context);
     final groupService = GroupService();
 
     return Scaffold(
@@ -26,8 +27,10 @@ class GroupDetailScreen extends StatelessWidget {
                 return IconButton(
                   icon: Icon(Icons.exit_to_app),
                   onPressed: () async {
-                    await Provider.of<GroupProvider>(context, listen: false).leaveGroup(group.id, user.id);
-                    Navigator.pop(context);
+                    final navigator = Navigator.of(context);
+                    final groupProvider = Provider.of<GroupProvider>(context, listen: false);
+                    await groupProvider.leaveGroup(group.id, user.id);
+                    navigator.pop();
                   },
                 );
               }

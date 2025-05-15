@@ -6,6 +6,8 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  LoginScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +29,19 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                final navigator = Navigator.of(context);
+                final scaffoldMessenger = ScaffoldMessenger.of(context);
+
                 bool success = await authProvider.login(
                   _emailController.text,
                   _passwordController.text,
                 );
+
                 if (success) {
-                  Navigator.pushReplacementNamed(context, '/home');
+                  navigator.pushReplacementNamed('/home');
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Login failed')),
+                  scaffoldMessenger.showSnackBar(
+                    const SnackBar(content: Text('Login failed')),
                   );
                 }
               },

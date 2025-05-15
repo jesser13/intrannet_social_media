@@ -4,7 +4,7 @@ import '../../models/group.dart';
 class GroupTile extends StatelessWidget {
   final Group group;
 
-  GroupTile({required this.group});
+  const GroupTile({Key? key, required this.group}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

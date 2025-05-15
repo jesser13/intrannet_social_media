@@ -4,7 +4,14 @@ import '../../providers/auth_provider.dart';
 import '../../providers/group_provider.dart';
 import '../widgets/group_tile.dart';
 
-class GroupListScreen extends StatelessWidget {
+class GroupListScreen extends StatefulWidget {
+  const GroupListScreen({Key? key}) : super(key: key);
+
+  @override
+  GroupListScreenState createState() => GroupListScreenState();
+}
+
+class GroupListScreenState extends State<GroupListScreen> {
   final TextEditingController _groupNameController = TextEditingController();
   bool _isPrivate = false;
 
@@ -76,12 +83,15 @@ class GroupListScreen extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () async {
+                                final navigator = Navigator.of(context);
                                 await groupProvider.createGroup(
                                   _groupNameController.text,
                                   user.id,
                                   _isPrivate,
                                 );
-                                Navigator.pop(context);
+                                if (mounted) {
+                                  navigator.pop();
+                                }
                               },
                               child: Text('Create'),
                             ),
@@ -99,12 +109,15 @@ class GroupListScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () async {
+                    final navigator = Navigator.of(context);
                     await groupProvider.createGroup(
                       _groupNameController.text,
                       user.id,
                       _isPrivate,
                     );
-                    Navigator.pop(context);
+                    if (mounted) {
+                      navigator.pop();
+                    }
                   },
                   child: Text('Create'),
                 ),

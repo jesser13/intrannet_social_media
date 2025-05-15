@@ -7,11 +7,13 @@ import '../../providers/post_provider.dart';
 import 'dart:io';
 
 class PostCreationScreen extends StatefulWidget {
+  const PostCreationScreen({Key? key}) : super(key: key);
+
   @override
-  _PostCreationScreenState createState() => _PostCreationScreenState();
+  PostCreationScreenState createState() => PostCreationScreenState();
 }
 
-class _PostCreationScreenState extends State<PostCreationScreen> {
+class PostCreationScreenState extends State<PostCreationScreen> {
   final TextEditingController _contentController = TextEditingController();
   File? _image;
   File? _file;
@@ -70,13 +72,18 @@ class _PostCreationScreenState extends State<PostCreationScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
+                final navigator = Navigator.of(context);
+
                 await postProvider.createPost(
                   authProvider.user!.id,
                   _contentController.text,
                   imagePath: _image?.path,
                   filePath: _file?.path,
                 );
-                Navigator.pop(context);
+
+                if (mounted) {
+                  navigator.pop();
+                }
               },
               child: Text('Post'),
             ),

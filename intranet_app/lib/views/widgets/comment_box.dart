@@ -11,7 +11,7 @@ class CommentBox extends StatelessWidget {
   final Post post; // Added post parameter
   final TextEditingController _commentController = TextEditingController();
 
-  CommentBox({required this.postId, required this.post});
+  CommentBox({Key? key, required this.postId, required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +55,13 @@ class CommentBox extends StatelessWidget {
                   icon: Icon(Icons.send),
                   onPressed: () async {
                     if (_commentController.text.isNotEmpty) {
+                      final notificationProvider = Provider.of<NotificationProvider>(context, listen: false);
+
                       await postProvider.addComment(postId, user.id, _commentController.text);
                       _commentController.clear();
+
                       // Trigger notification
-                      Provider.of<NotificationProvider>(context, listen: false).createNotification(
+                      notificationProvider.createNotification(
                         userId: post.userId, // Use post.userId from parameter
                         content: 'New comment on your post',
                         type: 'comment',

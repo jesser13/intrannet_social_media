@@ -18,10 +18,12 @@ import 'views/chat/chat_list_screen.dart';
 import 'views/chat/chat_detail_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -37,17 +39,17 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.blue),
         initialRoute: '/login',
         routes: {
-          '/login': (_) => LoginScreen(),
-          '/signup': (_) => SignupScreen(),
-          '/home': (_) => FeedScreen(),
-          '/create_post': (_) => PostCreationScreen(),
-          '/notifications': (_) => NotificationScreen(),
-          '/groups': (_) => GroupListScreen(),
-          '/group_detail': (_) => GroupDetailScreen(),
-          '/profile': (_) => UserProfileScreen(),
-          '/edit_profile': (_) => EditProfileScreen(),
-          '/chat': (_) => ChatListScreen(),
-          '/chat_detail': (_) => ChatDetailScreen(),
+          '/login': (context) => LoginScreen(key: UniqueKey()),
+          '/signup': (context) => SignupScreen(key: UniqueKey()),
+          '/home': (context) => FeedScreen(key: UniqueKey()),
+          '/create_post': (context) => PostCreationScreen(key: UniqueKey()),
+          '/notifications': (context) => NotificationScreen(key: UniqueKey()),
+          '/groups': (context) => GroupListScreen(key: UniqueKey()),
+          '/group_detail': (context) => GroupDetailScreen(key: UniqueKey()),
+          '/profile': (context) => UserProfileScreen(key: UniqueKey()),
+          '/edit_profile': (context) => EditProfileScreen(key: UniqueKey()),
+          '/chat': (context) => ChatListScreen(),
+          '/chat_detail': (context) => ChatDetailScreen(key: UniqueKey()),
         },
       ),
     );

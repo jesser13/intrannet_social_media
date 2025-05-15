@@ -7,6 +7,8 @@ import '../widgets/post_card.dart';
 import 'package:badges/badges.dart' as badges;
 
 class FeedScreen extends StatelessWidget {
+  const FeedScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);

@@ -6,11 +6,13 @@ import '../../models/user.dart';
 import 'dart:io';
 
 class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({Key? key}) : super(key: key);
+
   @override
-  _EditProfileScreenState createState() => _EditProfileScreenState();
+  EditProfileScreenState createState() => EditProfileScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController _nameController;
   late TextEditingController _functionController;
   late TextEditingController _bioController;
@@ -67,6 +69,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
+                final navigator = Navigator.of(context);
                 final updatedUser = User(
                   id: authProvider.user!.id,
                   name: _nameController.text,
@@ -78,7 +81,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   bio: _bioController.text,
                 );
                 await authProvider.updateProfile(updatedUser);
-                Navigator.pop(context);
+                if (mounted) {
+                  navigator.pop();
+                }
               },
               child: Text('Save'),
             ),
