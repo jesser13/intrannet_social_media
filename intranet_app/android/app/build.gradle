@@ -26,11 +26,13 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 34 // Mise à jour de 33 à 34
+    namespace "com.example.intranet_app"
+    
     defaultConfig {
-        applicationId "com.example.yourapp"
+        applicationId "com.example.intranet_app"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 34 // Mise à jour de 33 à 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

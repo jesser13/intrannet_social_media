@@ -6,9 +6,13 @@ import '../../providers/notification_provider.dart';
 import '../widgets/chat_bubble.dart';
 
 class ChatDetailScreen extends StatelessWidget {
-  final TextEditingController _messageController = TextEditingController();
-
-  const ChatDetailScreen({Key? key}) : super(key: key);
+  // Correction : déclarez le contrôleur sans l'initialiser ici
+  final TextEditingController _messageController;
+  
+  // Initialisez-le dans le constructeur
+  ChatDetailScreen({Key? key}) : 
+    _messageController = TextEditingController(),
+    super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,3 +78,4 @@ class ChatDetailScreen extends StatelessWidget {
     );
   }
 }
+
